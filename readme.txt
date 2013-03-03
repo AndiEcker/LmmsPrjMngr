@@ -19,13 +19,21 @@ As soon as you pass also a second command line argument the tool is exporting th
 together with the referenced external files to the folder that are specified in the second
 command line argument.
 
+The third and optional ExportMode parameter affects the path of the external files.
+Supported export mode parameter values (defaults to "backup" if omitted; case insensitive):
+ - absolutize  use absolute path (also changes path in lmms project file)
+ - backup      references to external files keep unchanged
+ - factorize   copy user files into factory destination subfolder
+ - userize     copy factory files into user subfolder (working or data directory)
+
 
 Options
 -------
 
 The following options are supported:
--h/--help		show help message and quit.
--
+-c/--compress   compress exported LMMS project file (mmpz format).
+-h/--help       show help message and quit.
+-u/--uncompress uncompress exported LMMS project file (mmp format).
 -v/--verbose	display more information about the tool actions.
 
 
@@ -34,11 +42,11 @@ Installation
 ------------
 
 On Linux: copy the the files LmmsPrjMngrMain.py and app_const.py to your machine and make shure you have
-python, pyqt and the Qt runtime installed. Execute the tool with the following command line:
+python 2.5 or higher, PyQt4 and the Qt runtime or SDK installed. Execute the tool with the following command line:
    python LmmsPrjMngrMain.py [options] [command line args]
    
    
-On Windows: copy the dist folder to your machine and execute the tool with following command line:
+On Windows: copy the win-exe-Vx.x subfolder to your machine and execute the tool with following command line:
    LmmsPrjMngr.exe [options] [command line args]
    
 
@@ -48,5 +56,6 @@ Future Enhancements
 * Allow to re-import of exported LMMS project with full integration of external files into the
   LMMS environment (folder structure) of the destination machine.
 * GUI
+* Determine appropriate destination samples subfolder name from the name of the sample/wave file (for factorize export mode).
 
 <EOF>
