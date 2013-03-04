@@ -295,10 +295,10 @@ class LmmsProject(QtCore.QObject):
                                 lastElemName = extRef.elemName
                         elif optVerbose: 
                             filenames.append(extRef.desc + '=' + fnam \
-                                             + (" (" + completeSourceFileInfo(fnam, extRef).absoluteFilePath() \
+                                             + (" (" + self.completeSourceFileInfo(fnam, extRef).absoluteFilePath() \
                                                 + ")" if QtCore.QFileInfo(fnam).isRelative() else ""))
                         else: 
-                            filenames.append(completeSourceFileInfo(fnam, extRef).absoluteFilePath())
+                            filenames.append(self.completeSourceFileInfo(fnam, extRef).absoluteFilePath())
                                                                                       
         if xtree.hasError():
             print("Error parsing XML at line:col %(line)d:%(col)d (offset +%(charOffset)d): %(errText)s" \
