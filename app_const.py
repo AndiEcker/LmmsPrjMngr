@@ -8,5 +8,5 @@ Created on 28-Feb-2013
 @author: andi
 '''
 APP_TITLE = 'LMMS Project Manager'
-APP_VERSION = '0.9'
+APP_VERSION = '0.9.1'
 

@@ -172,7 +172,10 @@ class LmmsProject(QtCore.QObject):
         if self.optExportMode <> OEM_ABSOLUTIZE:
             subDirNames += dirSep
             if isAbs:
-                subDirNames += 'absolute' + dirSep + fiSoure.absoluteFilePath().replace(':', '_')
+                """ BUG in pyQt?!?!?: without the QString cast the error "cannot concatenate 'str' and 'QChar' objects"
+                    is raised and only if the first part is a str object (not the other way round)
+                """
+                subDirNames += QtCore.QString('absolute') + dirSep + fiSource.absoluteFilePath().replace(':', '_')
             else:
                 if fiSource.absolutePath().startsWith(self.env.instDir) and self.optExportMode <> OEM_USERIZE:
                     subDirNames += 'factory'
@@ -214,7 +217,8 @@ class LmmsProject(QtCore.QObject):
                     # open sample file for to copy
                     sfile = QtCore.QFile(fiSource.absoluteFilePath())
                     if not sfile.open(QtCore.QIODevice.ReadOnly):
-                        print("Error opening %(desc)s file %(fileDesc)s for copying!" % {'desc' : extRef.desc, 'fileDesc' : sfile.fileName()})
+                        print("Error opening %(desc)s file %(fileDesc)s for copying! Prj: %(prjName)s." \
+                              % {'desc' : extRef.desc, 'fileDesc' : sfile.fileName(), 'prjName' : self.prjFileName})
                     else:
                         # copy file and overwrite destination file if exists
                         if fiDest.exists() and not QtCore.QFile.remove(fiDest.absoluteFilePath()):   # lazy AND
